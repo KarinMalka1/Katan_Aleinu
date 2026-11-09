@@ -1,0 +1,149 @@
+{
+  "name": "Child",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "\u05e9\u05dd \u05d4\u05d9\u05dc\u05d3"
+    },
+    "birth_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "development_notes": {
+      "type": "string",
+      "description": "\u05de\u05d9\u05d3\u05e2 \u05d4\u05ea\u05e4\u05ea\u05d7\u05d5\u05ea\u05d9 \u05d1\u05e1\u05d9\u05e1\u05d9"
+    },
+    "parent_role": {
+      "type": "string"
+    },
+    "challenge": {
+      "type": "string"
+    },
+    "daily_minutes": {
+      "type": "string"
+    },
+    "day_type": {
+      "type": "string",
+      "description": "\u05de\u05d1\u05e0\u05d4 \u05d4\u05d9\u05d5\u05dd \u05e9\u05dc \u05d4\u05d9\u05dc\u05d3"
+    },
+    "routine": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "\u05e8\u05d2\u05e2\u05d9 \u05e9\u05d2\u05e8\u05d4 \u05de\u05ea\u05d0\u05d9\u05de\u05d9\u05dd \u05dc\u05e4\u05e2\u05d9\u05dc\u05d5\u05ea"
+    },
+    "child_interests": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "parent_interests": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "priorities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "\u05ea\u05d7\u05d5\u05de\u05d9 \u05e2\u05d3\u05d9\u05e4\u05d5\u05ea"
+    },
+    "notify_times": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "\u05e9\u05e2\u05d5\u05ea \u05d4\u05ea\u05e8\u05d0\u05d4 HH:MM"
+    },
+    "parent_emails": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "\u05d4\u05d5\u05e8\u05d9\u05dd \u05d4\u05de\u05e9\u05ea\u05e4\u05d9\u05dd \u05d0\u05ea \u05d4\u05e4\u05e8\u05d5\u05e4\u05d9\u05dc"
+    },
+    "points": {
+      "type": "number",
+      "default": 0
+    },
+    "streak": {
+      "type": "number",
+      "default": 0
+    },
+    "best_streak": {
+      "type": "number",
+      "default": 0
+    },
+    "total_activities": {
+      "type": "number",
+      "default": 0
+    },
+    "last_report_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "badges": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "name",
+    "birth_date"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "data.parent_emails": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "data.parent_emails": {
+            "$in": [
+              "{{user.email}}"
+            ]
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

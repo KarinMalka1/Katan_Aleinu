@@ -1,0 +1,109 @@
+{
+  "name": "Report",
+  "type": "object",
+  "properties": {
+    "child_id": {
+      "type": "string"
+    },
+    "child_name": {
+      "type": "string"
+    },
+    "activity_title": {
+      "type": "string"
+    },
+    "activity_description": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "idea",
+        "photo",
+        "scheduled"
+      ],
+      "default": "idea"
+    },
+    "points": {
+      "type": "number",
+      "default": 10
+    },
+    "report_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "rating": {
+      "type": "number",
+      "description": "\u05d3\u05d9\u05e8\u05d5\u05d2 \u05db\u05d5\u05db\u05d1\u05d9\u05dd 1-5"
+    },
+    "engagement": {
+      "type": "string",
+      "description": "\u05ea\u05e9\u05d5\u05d1\u05d4: \u05de\u05e2\u05d5\u05e8\u05d1\u05d5\u05ea \u05d4\u05d9\u05dc\u05d3"
+    },
+    "experience": {
+      "type": "string",
+      "description": "\u05ea\u05e9\u05d5\u05d1\u05d4: \u05d7\u05d5\u05d5\u05d9\u05d9\u05ea \u05d4\u05d4\u05d5\u05e8\u05d4"
+    },
+    "notes": {
+      "type": "string",
+      "description": "\u05d4\u05e2\u05e8\u05d5\u05ea \u05d7\u05d5\u05e4\u05e9\u05d9\u05d5\u05ea"
+    },
+    "parent_emails": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "child_id",
+    "activity_title"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "data.parent_emails": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "data.parent_emails": {
+            "$in": [
+              "{{user.email}}"
+            ]
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}
