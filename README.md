@@ -1,64 +1,62 @@
-<div dir="rtl">
+# 🌱 Katan Aleinu
 
-# 🌱 קטן עלינו (GrowWith)
+**A personalized activity recommendation app for parents of children from birth to age 6. It turns everyday routine moments into opportunities for development.**
 
-**מערכת המלצות מותאמות אישית להורים לילדים מגיל לידה עד 6, שהופכת רגעי שגרה להזדמנויות להתפתחות.**
+![App demo](docs/demo.gif)
 
-![הדגמה של האפליקציה](docs/demo.gif)
+## About the project
 
-## האתגר
+I built this project as a student during a hackathon. Our team set out to solve one challenge: young parents often don't know what to do with their child during everyday routine moments. How can we help them turn daily life into a chance for their child to grow, without adding more pressure to their day?
 
-במהלך ההאקתון הקבוצה שלנו העלתה אתגר: הורים צעירים לא תמיד יודעים מה לעשות עם הילד ברגעי השגרה. איך עוזרים להם להפוך את היומיום להזדמנויות להתפתחות, בלי להוסיף עוד עומס?
+## The solution
 
-## הפתרון
+Katan Aleinu gets to know each child through a personal profile: age, interests, challenges and daily routine. Based on this profile, the app suggests short, simple activities grounded in research (AAP, CDC, WHO). Each activity takes only a few minutes and needs no special equipment.
 
-"קטן עלינו" מכירה את הילד דרך פרופיל אישי: גיל, תחומי עניין, אתגרים ושגרת יום. לפי הפרופיל היא מציעה פעילויות קצרות ופשוטות, מבוססות מחקר (AAP, CDC, WHO), שאפשר לעשות תוך דקות ובלי ציוד מיוחד. ההורה מקבל תזכורות בשעות שבחר. אפשר גם לצלם את הסיטואציה ולקבל רעיון שמתאים בדיוק לרגע. אחרי הפעילות ההורה מדווח ומדרג, ומקבל נקודות, רצף ימים ותגים שמעודדים להמשיך.
+Parents get reminders at times they choose. They can also take a photo of the current situation and get an activity idea that fits that exact moment. After an activity, the parent reports and rates the experience, and earns points, daily streaks and badges that motivate them to keep going.
 
-## פיצ'רים עיקריים
+## Main features
 
-- **פרופיל ילד ותהליך הצטרפות**: גיל, שגרת יום, תחומי עניין של הילד וההורה, אתגר מרכזי ותחומי עדיפות (שפה, מוטוריקה, חברתי, רגשי, חשיבה, יצירתיות).
-- **רעיונות לפי מקום ורגע**: בבית (החתלה, אכילה, לבוש, רחצה, סיפור, משחק), במטבח, בפארק, בסופר ובאוטו.
-- **צילום מהיר**: מצלמים את המקום או החפץ, ו-AI מנתח את התמונה ומציע פעילות מתאימה.
-- **טיפים לכל פעילות**: איך להתחיל, מה לומר ואיך להעמיק.
-- **דיווח ומשוב**: דירוג, מעורבות הילד וחוויית ההורה.
-- **גיימיפיקציה**: נקודות, רצף ימים ותגים (🌱 הצעד הראשון, 🔥 3 ימים ברצף, 🏆 25 פעילויות ועוד).
-- **כמה ילדים ושני הורים**: אפשר להחליף בין ילדים, ושני ההורים רואים את אותו פרופיל.
-- **מסך התקדמות** עם סיכום הפעילויות והתגים.
-- ממשק בעברית ומימין לשמאל, מותאם למובייל.
+- **Child profile and onboarding**: age, daily routine, the child's and the parent's interests, a main challenge, and priority areas (language, motor skills, social, emotional, thinking, creativity).
+- **Ideas by place and moment**: at home (diaper change, eating, dressing, bath time, story time, play), in the kitchen, at the park, at the supermarket and in the car.
+- **Quick photo**: take a photo of the place or an object, and AI analyzes it and suggests a matching activity.
+- **Tips for every activity**: how to start, what to say and how to take it further.
+- **Reports and feedback**: a rating, the child's engagement and the parent's experience.
+- **Gamification**: points, daily streaks and badges (🌱 First Step, 🔥 3-Day Streak, 🏆 25 Activities and more).
+- **Several children, two parents**: switch between children, and both parents share the same child profile.
+- **Progress screen** with a summary of activities and badges.
+- A Hebrew, right-to-left interface designed for mobile.
 
-## טכנולוגיות
+## Tech stack
 
-| שכבה | כלים |
-|------|------|
+| Layer | Tools |
+|-------|-------|
 | Frontend | React, Vite, React Router, TanStack Query |
-| עיצוב | Tailwind CSS, shadcn/ui (Radix UI), lucide-react |
-| Backend | [Base44](https://base44.com): ישויות, הרשאות (RLS), אימות משתמשים |
-| AI | פונקציות שרת (Deno) שקוראות ל-LLM דרך Base44 |
+| Styling | Tailwind CSS, shadcn/ui (Radix UI), lucide-react |
+| Backend | [Base44](https://base44.com): entities, row-level security, user authentication |
+| AI | Server functions (Deno) that call an LLM through Base44 |
 
-## מבנה הפרויקט
+## Project structure
 
 ```
 base44/
-  entities/       # מודל הנתונים: Child, Activity, Report, User
-  functions/      # פונקציות שרת
-    suggestActivity/     # הצעת פעילות, כולל ניתוח תמונה
-    generateActivities/  # יצירת סט פעילויות לפי פרופיל הילד
-    placeIdeas/          # רעיונות לפי מקום ורגע בשגרה
-    activityTips/        # טיפים להורה לכל פעילות
+  entities/       # Data model: Child, Activity, Report, User
+  functions/      # Server functions
+    suggestActivity/     # Suggests an activity, including photo analysis
+    generateActivities/  # Generates a set of activities from the child's profile
+    placeIdeas/          # Ideas by place and routine moment
+    activityTips/        # Tips for the parent for each activity
 src/
   pages/          # Landing, Home, Onboarding, Progress, Login, Register...
-  components/     # רכיבי האפליקציה (onboarding/, ui/ ועוד)
+  components/     # App components (onboarding/, ui/ and more)
   hooks/          # useChildren, useReminders
-  lib/            # gamification.js (נקודות, רצף, תגים), places.js (מקומות ורגעים)
+  lib/            # gamification.js (points, streaks, badges), places.js (places and moments)
 docs/
-  demo.gif        # סרטון הדגמה
+  demo.gif        # Demo video
 ```
 
-## הרצה מקומית
+## Running locally
 
-דרישות: [Node.js](https://nodejs.org), [Deno](https://docs.deno.com/runtime/getting_started/installation/) ו-Base44 CLI.
-
-</div>
+Requirements: [Node.js](https://nodejs.org), [Deno](https://docs.deno.com/runtime/getting_started/installation/) and the Base44 CLI.
 
 ```bash
 npm install
@@ -68,19 +66,15 @@ base44 link    # once per clone
 base44 dev     # local backend + frontend
 ```
 
-<div dir="rtl">
+Then open the URL that `base44 dev` prints (usually `http://localhost:5173`).
 
-אחר כך פותחים את הכתובת ש-`base44 dev` מדפיס (בדרך כלל `http://localhost:5173`).
+Notes:
+- `base44 link` creates the file `base44/.app.jsonc`, which is not committed to git. Run it after every new clone.
+- Don't run `npm run dev` on its own. Without `base44 dev` there is no backend, and every API call fails.
+- With `base44 dev`, data is kept in memory and is erased on every restart. To work against the hosted backend, use `base44 dev --remote`. Note that in this mode all writes go to the production data.
 
-הערות:
-- `base44 link` כותב את הקובץ `base44/.app.jsonc`, שלא נשמר ב-git. צריך להריץ אותו בכל clone חדש.
-- אין להריץ `npm run dev` לבד, כי בלי `base44 dev` אין backend וכל קריאות ה-API נכשלות.
-- ב-`base44 dev` הנתונים נשמרים בזיכרון ונמחקים בכל הפעלה מחדש. כדי לעבוד מול ה-backend המקורי משתמשים ב-`base44 dev --remote`, אבל אז הכתיבה נעשית לנתוני ה-production.
+More information: [Base44 local development docs](https://docs.base44.com/developers/backend/overview/local-dev/local-development-overview)
 
-מידע נוסף: [תיעוד Base44 לפיתוח מקומי](https://docs.base44.com/developers/backend/overview/local-dev/local-development-overview)
+## Disclaimer
 
-## הערה
-
-האפליקציה מציעה רעיונות לפעילות בלבד, ואינה מחליפה ייעוץ או אבחון מקצועי.
-
-</div>
+The app only suggests activity ideas. It does not replace professional advice or diagnosis.
