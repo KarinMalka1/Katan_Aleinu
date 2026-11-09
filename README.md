@@ -1,4 +1,4 @@
-# 🌱 Katan Aleinu
+# Katan Aleinu
 
 **A personalized activity recommendation app for parents of children from birth to age 6. It turns everyday routine moments into opportunities for development.**
 
